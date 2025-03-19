@@ -1,5 +1,5 @@
 from datetime import datetime, UTC
-from typing import List, Optional
+from typing import List
 from .db.base import Database
 
 class CommunityService:
