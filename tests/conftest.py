@@ -7,7 +7,7 @@ from whitelabel_community.db.base import Database
 # Suppress specific UTC warning from jose library
 warnings.filterwarnings(
     "ignore",
-    message="datetime.datetime.utcnow\(\) is deprecated",
+    message=r"datetime\.datetime\.utcnow\(\) is deprecated",  # Fixed escape sequence
     category=DeprecationWarning,
     module="jose.jwt"
 )

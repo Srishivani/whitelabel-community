@@ -1,4 +1,4 @@
-from datetime import datetime, UTC
+from datetime import datetime
 from typing import List, Optional
 from .db.base import Database
 
@@ -12,7 +12,7 @@ class PostService:
             "author_id": author_id,
             "title": title,
             "content": content,
-            "created_at": datetime.now(UTC),
+            "created_at": datetime.now(),
             "likes": 0,
             "comments": []
         }
@@ -23,7 +23,7 @@ class PostService:
         comment = {
             "author_id": author_id,
             "content": content,
-            "created_at": datetime.now(UTC)
+            "created_at": datetime.now()
         }
         return await self.db.update_one(
             "posts",
