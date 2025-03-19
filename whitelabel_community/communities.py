@@ -1,5 +1,5 @@
-from datetime import datetime, UTC
-from typing import List
+from datetime import datetime
+from typing import List, Optional
 from .db.base import Database
 
 class CommunityService:
@@ -12,7 +12,7 @@ class CommunityService:
             "owner_id": owner_id,
             "description": description,
             "members": [{"user_id": owner_id, "role": "admin"}],
-            "created_at": datetime.now(UTC),
+            "created_at": datetime.now(),
             "settings": {"private": False}
         }
         community_id = await self.db.insert_one("communities", community)
