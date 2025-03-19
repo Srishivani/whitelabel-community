@@ -14,12 +14,14 @@ class AuthService:
     async def create_access_token(self, data: dict, expires_delta: Optional[timedelta] = None):
         to_encode = data.copy()
         expire = datetime.now() + (expires_delta or timedelta(minutes=15))
-        to_encode.update({"exp": expire})
+        to_encode.update({"exp": expire.timestamp()})
         return jwt.encode(to_encode, self.secret_key, algorithm=self.algorithm)
 
     async def verify_token(self, token: str = Depends(OAuth2PasswordBearer(tokenUrl="token"))):
         try:
             payload = jwt.decode(token, self.secret_key, algorithms=[self.algorithm])
+            if "exp" not in payload:
+                raise JWTError("Token has no expiration")
             return payload
         except JWTError:
             raise HTTPException(
